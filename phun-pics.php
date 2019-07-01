@@ -55,7 +55,6 @@ do {
     if (!$do_low && !$do_up) {
         // kill switch
         bla("no more pics to find");
-        //bla(var_export(get_defined_vars()));
 
         break;
     }
@@ -156,6 +155,10 @@ function curl($number) {
 
     curl_close($curl);
     fclose($file);
+
+    if ($code !== 200 && !unlink($path)) {
+        bla("unlink fail $path");
+    }
 
     return $code;
 }
